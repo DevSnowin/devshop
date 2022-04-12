@@ -15,9 +15,9 @@ export const categories = [
   },
   {
     id: 3,
-    title: "Mouse",
+    title: "Bluetooth Speaker",
     imageUrl:
-      "https://images.unsplash.com/photo-1623820919239-0d0ff10797a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+      "https://images.unsplash.com/photo-1605957072929-4fd939a05e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
     id: 4,
@@ -29,8 +29,8 @@ export const categories = [
   },
   {
     id: 5,
-    title: "Bluetooth Speaker",
+    title: "Mouse",
     imageUrl:
-      "https://images.unsplash.com/photo-1605957072929-4fd939a05e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1623820919239-0d0ff10797a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
   },
 ];
