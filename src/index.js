@@ -3,13 +3,17 @@ import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
+import { UserProvider } from "./contexts/user.context";
+
 import "./styles/index.scss";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </React.StrictMode>,
 );
 

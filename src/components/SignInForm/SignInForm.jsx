@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
+
 import Button from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
 import "./SignInForm.scss";
@@ -14,16 +15,18 @@ const formFieldsValues = {
 };
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+
   const [formFields, setFormFields] = useState(formFieldsValues);
   const { email, password } = formFields;
 
-  const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-
+  // Google Sign In
+  const signInWithGoogle = async () => {
+    await signInWithGooglePopup();
     // Creating user document
-    await createUserDocumentFromAuth(user);
-
     console.log("Login Successfully!");
+    // Redirect to home page
+    navigate("/");
   };
 
   // Reset the form fields
@@ -31,21 +34,23 @@ const SignInForm = () => {
     setFormFields(formFieldsValues);
   };
 
+  // Handles the input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
+  // Handles the form submit - login using email ID
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      console.log("Login Successfully!");
+      await signInAuthUserWithEmailAndPassword(email, password);
+      // Reset the form
       resetFormFields();
+      // For Debug
+      console.log("Login Successfully!");
+      // Redirect to home page
+      navigate("/");
     } catch (error) {
       switch (error.code) {
         case "auth/user-not-found":
@@ -84,7 +89,7 @@ const SignInForm = () => {
 
         <div className='buttons'>
           <Button type='submit'>Sign In</Button>
-          <Button type='button' buttonType='google' onClick={logGoogleUser}>
+          <Button type='button' buttonType='google' onClick={signInWithGoogle}>
             Sign in with Google
           </Button>
         </div>

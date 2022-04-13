@@ -1,11 +1,12 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -20,19 +21,32 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () =>
-  signInWithRedirect(auth, googleProvider);
 export const db = getFirestore();
 
+// Sign In user with google
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+
+// Signin the user with email and password
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+// SignOut User
+export const SignOutUser = async () => {
+  await signOut(auth);
+};
+
+// Create the user document while sign in / sign up
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {},
@@ -64,14 +78,14 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
+// Create the user document while sign in / sign up using email and password method
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return;
-
-  return await signInWithEmailAndPassword(auth, email, password);
+// Auth observer
+export const onAuthStateChangedListener = (callback) => {
+  onAuthStateChanged(auth, callback);
 };

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
+
 import Button from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
 import "./SignUpForm.scss";
@@ -15,6 +17,8 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { displayName, email, password, confirmPassword } = formFields;
@@ -36,9 +40,13 @@ const SignUpForm = () => {
         email,
         password,
       );
-
+      // Create the user document
       await createUserDocumentFromAuth(user, { displayName });
+      // Reset the form
       resetFormFields();
+      console.log("Account created successfully!");
+      // Redirect to home page
+      navigate("/");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("User already exists!");
