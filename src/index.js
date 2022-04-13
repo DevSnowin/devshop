@@ -6,14 +6,23 @@ import App from "./App";
 import { UserProvider } from "./contexts/user.context";
 
 import "./styles/index.scss";
+import { ProductsProvider } from "./contexts/products.context";
+import { BrowserRouter } from "react-router-dom";
+import { CartProvider } from "./contexts/Cart.context";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <App />
-    </UserProvider>
+    <BrowserRouter>
+      <UserProvider>
+        <ProductsProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </ProductsProvider>
+      </UserProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 );
 

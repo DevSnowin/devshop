@@ -1,4 +1,7 @@
 .shop-container {
-  background-color: aqua;
-  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+  row-gap: 2.8rem;
+  margin-top: 80px;
 }

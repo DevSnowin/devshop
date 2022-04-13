@@ -10,7 +10,9 @@ html {
 }
 
 body {
+  user-select: none;
   margin: 0;
+  padding: 20px 40px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
