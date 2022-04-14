@@ -37,12 +37,11 @@
   &.inverted {
     background-color: white;
     color: #ff2876;
-    border: 1px solid #ff2876;
+    border: none;
 
     &:hover {
       background-color: #ff2876;
       color: white;
-      border: none;
     }
   }
 }
