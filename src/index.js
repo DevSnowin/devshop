@@ -2,13 +2,13 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 
-import App from "./App";
 import { UserProvider } from "./contexts/user.context";
-
-import "./styles/index.scss";
 import { ProductsProvider } from "./contexts/products.context";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./contexts/Cart.context";
+
+import App from "./App";
+import { GlobalStyles } from "./styles/GlobalStyles";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -18,6 +18,7 @@ root.render(
       <UserProvider>
         <ProductsProvider>
           <CartProvider>
+            <GlobalStyles />
             <App />
           </CartProvider>
         </ProductsProvider>

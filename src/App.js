@@ -2,20 +2,20 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
-import Home from "./pages/HomePage/Home";
-import Shop from "./pages/ShopPage/Shop";
+import HomePage from "./pages/HomePage/HomePage";
 import ErrorPage from "./pages/ErrorPage/404";
-import Authentication from "./pages/AuthenticationPage/Authentication";
-import Checkout from "./pages/CheckoutPage/Checkout";
+import AuthenticationPage from "./pages/AuthenticationPage/AuthenticationPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import ShopPage from "./pages/ShopPage/ShopPage";
 
 const App = () => {
   return (
     <Routes>
       <Route path='/' element={<Header />}>
-        <Route index element={<Home />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/auth' element={<Authentication />} />
-        <Route path='/checkout' element={<Checkout />} />
+        <Route index element={<HomePage />} />
+        <Route path='shop/*' element={<ShopPage />} />
+        <Route path='/auth' element={<AuthenticationPage />} />
+        <Route path='/checkout' element={<CheckoutPage />} />
         <Route path='*' element={<ErrorPage />} />
       </Route>
     </Routes>

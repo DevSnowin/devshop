@@ -4,24 +4,33 @@ import { CartContext } from "../../contexts/Cart.context";
 
 import Button from "../Button/Button";
 import CartItem from "../CartItem/CartItem";
-import "./CartDropdown.scss";
+import "./CartDropdown.Styles.jsx";
+import {
+  CartDropdownContainer,
+  CartItems,
+  EmptyMessage,
+} from "./CartDropdown.Styles.jsx";
 
-const CartDropdown = () => {
-  const { cartItems } = useContext(CartContext);
-
+const CartDropdown = ({ visible }) => {
+  const { cartItems, setIsCartOpen } = useContext(CartContext);
   const navigate = useNavigate();
 
-  const goToCheckoutPage = () => navigate("/checkout");
+  const goToCheckoutPage = () => {
+    setIsCartOpen((prev) => !prev);
+    navigate("/checkout");
+  };
 
   return (
-    <div className='cart-dropdown-container'>
-      <div className='cart-items'>
-        {cartItems.map((item) => (
-          <CartItem key={item.id} cartItem={item} />
-        ))}
-      </div>
+    <CartDropdownContainer visible={visible}>
+      <CartItems>
+        {cartItems.length ? (
+          cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
+        ) : (
+          <EmptyMessage>Your Cart is empty</EmptyMessage>
+        )}
+      </CartItems>
       <Button onClick={goToCheckoutPage}>GO TO CHECKOUT</Button>
-    </div>
+    </CartDropdownContainer>
   );
 };
 

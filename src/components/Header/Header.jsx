@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import CartIcon from "../CartIcon/CartIcon";
@@ -7,38 +7,48 @@ import DevLogo from "../../assets/images/devshop.svg";
 import { UserContext } from "../../contexts/user.context";
 import { SignOutUser } from "../../utils/firebase/firebase.utils";
 
-import "./Header.scss";
 import CartDropdown from "../CartDropdown/CartDropdown";
 import { CartContext } from "../../contexts/Cart.context";
+import {
+  Logo,
+  NavigationContainer,
+  NavItems,
+  NavLink,
+} from "./Header.Styles.jsx";
 
 const Header = () => {
   const { currentUser } = useContext(UserContext);
-
   const { isCartOpen } = useContext(CartContext);
+
+  const [navbar, setNavbar] = useState(false);
+
+  useEffect(() => {
+    const changeBackground = () => {
+      if (window.scrollY > 80) setNavbar(true);
+      else setNavbar(false);
+    };
+    window.addEventListener("scroll", changeBackground);
+  }, []);
 
   return (
     <Fragment>
-      <div className='navigation'>
-        <Link to='/' className='logo-container'>
-          <img src={DevLogo} alt='logo' className='logo' />
+      <NavigationContainer navbar={navbar}>
+        <Link to='/'>
+          <Logo src={DevLogo} alt='logo' />
         </Link>
-        <div className='nav-items'>
-          <Link className='nav-link' to='/shop'>
-            Shop
-          </Link>
+        <NavItems>
+          <NavLink to='/shop'>Shop</NavLink>
           {!currentUser ? (
-            <Link className='nav-link' to='/auth'>
-              Sign In
-            </Link>
+            <NavLink to='/auth'>Sign In</NavLink>
           ) : (
-            <span className='nav-link' onClick={SignOutUser}>
+            <NavLink as='span' onClick={SignOutUser}>
               Sign Out
-            </span>
+            </NavLink>
           )}
           <CartIcon />
-        </div>
-        {isCartOpen && <CartDropdown />}
-      </div>
+        </NavItems>
+        <CartDropdown visible={isCartOpen ? true : false} />
+      </NavigationContainer>
       <Outlet />
     </Fragment>
   );
