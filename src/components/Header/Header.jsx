@@ -33,15 +33,15 @@ const Header = () => {
   return (
     <Fragment>
       <NavigationContainer navbar={navbar}>
-        <Link to='/'>
-          <Logo src={DevLogo} alt='logo' />
+        <Link to="/">
+          <Logo src={DevLogo} alt="logo" />
         </Link>
         <NavItems>
-          <NavLink to='/shop'>Shop</NavLink>
+          <NavLink to="/shop">Shop</NavLink>
           {!currentUser ? (
-            <NavLink to='/auth'>Sign In</NavLink>
+            <NavLink to="/auth">Sign In</NavLink>
           ) : (
-            <NavLink as='span' onClick={SignOutUser}>
+            <NavLink as="span" onClick={SignOutUser}>
               Sign Out
             </NavLink>
           )}

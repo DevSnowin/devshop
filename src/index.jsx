@@ -1,6 +1,5 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
+import ReactDOM from "react-dom/client";
 
 import { UserProvider } from "./contexts/user.context";
 import { ProductsProvider } from "./contexts/products.context";
@@ -10,9 +9,7 @@ import { CartProvider } from "./contexts/Cart.context";
 import App from "./App";
 import { GlobalStyles } from "./styles/GlobalStyles";
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
@@ -24,10 +21,10 @@ root.render(
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
