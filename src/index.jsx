@@ -1,26 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 
-import { UserProvider } from "./contexts/user.context";
 import { ProductsProvider } from "./contexts/products.context";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./contexts/Cart.context";
 
 import App from "./App";
 import { GlobalStyles } from "./styles/GlobalStyles";
+import { store } from "./store/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <ProductsProvider>
-          <CartProvider>
-            <GlobalStyles />
-            <App />
-          </CartProvider>
-        </ProductsProvider>
-      </UserProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+          <ProductsProvider>
+            <CartProvider>
+              <GlobalStyles />
+              <App />
+            </CartProvider>
+          </ProductsProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
